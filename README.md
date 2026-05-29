@@ -1,0 +1,2 @@
+# special-guacamole
+Plan contingencias 
