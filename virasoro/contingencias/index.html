@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Contingencias y Protocolo de Auxilio — Corralón Municipal Virasoro</title>
+<style>
+:root{--rojo:#c0392b;--naranja:#e67e22;--azul:#1f3a93;--verde:#27ae60;--bg:#f4f6f8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:#222;line-height:1.5;padding-bottom:90px}
+header{background:linear-gradient(135deg,#8e1b12,#c0392b);color:#fff;padding:20px 16px}
+header .kick{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.9}
+header h1{font-size:1.25rem;margin:5px 0 3px}
+header .meta{font-size:.8rem;opacity:.9}
+nav.toc{background:#fff;border-bottom:1px solid #e2e6ea;padding:10px 12px;display:flex;gap:8px;overflow-x:auto;position:sticky;top:0;z-index:20}
+nav.toc a{flex:0 0 auto;font-size:.78rem;text-decoration:none;color:var(--rojo);background:#fdecea;padding:6px 11px;border-radius:20px;white-space:nowrap;font-weight:600}
+section{padding:16px;max-width:900px;margin:0 auto}
+h2{font-size:1.12rem;color:var(--azul);margin-bottom:10px;border-left:5px solid var(--rojo);padding-left:10px}
+h3{font-size:.98rem;color:#2c3e50;margin:12px 0 7px}
+p{font-size:.9rem;margin-bottom:9px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.07);padding:15px;margin-bottom:12px}
+.steps{counter-reset:st;list-style:none}
+.steps li{position:relative;padding:10px 10px 10px 44px;background:#fff;border-radius:10px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.06);font-size:.88rem}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--rojo);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}
+details{background:#fff;border-radius:10px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:.9rem;list-style:none;background:#f8f9fb}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'\25bc';float:right;font-size:.65rem;color:#999}
+details[open] summary::after{transform:rotate(180deg)}
+details .body{padding:12px 14px;font-size:.85rem}
+.tag{display:inline-block;border-radius:6px;color:#fff;font-size:.68rem;font-weight:700;padding:2px 8px;margin-right:6px}
+.t-fuego{background:var(--rojo)}.t-derr{background:var(--naranja)}.t-elec{background:#8e44ad}.t-les{background:var(--verde)}
+.pasa{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:16px}
+.pasa .tabs{display:flex;gap:6px;margin-bottom:12px}
+.pasa .tabs label{flex:1;text-align:center;background:#f0f2f5;border-radius:10px;padding:10px 4px;font-weight:800;font-size:1rem;cursor:pointer;color:#999;border:2px solid transparent}
+.pasa input{display:none}
+.panel{display:none;animation:fade .3s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+#p1:checked~.tabs label[for=p1],#p2:checked~.tabs label[for=p2],#p3:checked~.tabs label[for=p3],#p4:checked~.tabs label[for=p4]{color:#fff;background:var(--rojo);border-color:#8e1b12}
+#p1:checked~.panels .pn1,#p2:checked~.panels .pn2,#p3:checked~.panels .pn3,#p4:checked~.panels .pn4{display:block}
+.panel .big{font-size:2.3rem;text-align:center}
+.panel h4{color:var(--rojo);text-align:center;margin:6px 0}
+.panel p{text-align:center;font-size:.9rem}
+.dir{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.dir a{display:block;text-decoration:none;color:#fff;border-radius:12px;padding:14px;text-align:center}
+.dir a b{display:block;font-size:1.4rem;margin:3px 0}
+.d1{background:var(--rojo)}.d2{background:var(--verde)}.d3{background:var(--azul)}.d4{background:var(--naranja)}
+.roles{display:grid;gap:8px}
+.role{background:#fff;border-radius:10px;padding:11px 13px;box-shadow:0 1px 4px rgba(0,0,0,.06);font-size:.85rem}
+.role b{color:var(--azul)}
+.emer{position:fixed;bottom:0;left:0;right:0;background:var(--rojo);display:flex;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.2)}
+.emer a{flex:1;text-align:center;color:#fff;text-decoration:none;padding:10px 4px;font-size:.72rem;border-right:1px solid rgba(255,255,255,.25)}
+.emer a:last-child{border-right:none}.emer a b{display:block;font-size:1.05rem}
+footer{padding:16px;font-size:.72rem;color:#777;text-align:center}
+.pe{background:#1f3a93;color:#fff;border-radius:12px;padding:14px;text-align:center;font-weight:600;margin-bottom:12px}
+</style>
+<link rel="stylesheet" href="../lib/pannellum.css"><link rel="stylesheet" href="../lib/vr.css"><meta name="theme-color" content="#111">
+</head>
+<body>
+<div class="hero"><img src="../img/contingencias_hero.jpg" alt="Cómo actuar ante una emergencia"><span class="badge360">360° · Interactivo</span>
+<div class="ov" style="background:linear-gradient(180deg,rgba(0,0,0,0) 20%,rgba(90,15,10,.9))"><div class="kick">Plan de Contingencias · Protocolo de Auxilio</div><h1>Cómo actuar ante una emergencia</h1><p>Corralón Municipal de Gobernador Virasoro. Viví la emergencia en 360° y practicá con el extintor en realidad aumentada.</p><div class="cta"><button class="btn btn-r" onclick="abrirSimulador()">🧯 Simulador con cámara (AR)</button><a class="btn btn-g" href="#sec-vr">🥽 Emergencia 360°</a></div></div></div>
+<nav class="toc">
+<a href="#pe">Punto de encuentro</a>
+<a href="#protocolos">Protocolos</a>
+<a href="#sec-vr">360°</a><a href="#pasa">Simulador AR</a>
+<a href="#roles">Roles</a>
+<a href="#dir">Emergencias</a>
+</nav>
+<section id="pe">
+<div class="pe">📍 Punto de encuentro seguro<br>Calle J. R. Vidal, frente a la garita S-1 (Acceso Norte)</div>
+<div class="card">
+<h3>Regla general ante cualquier emergencia</h3>
+<ol class="steps">
+<li>Mantener la calma y dar la alarma a viva voz.</li>
+<li>Cortar la energía del sector si es seguro hacerlo.</li>
+<li>Evacuar por la ruta más cercana, sin correr y sin volver atrás.</li>
+<li>Dirigirse al punto de encuentro y no retirarse de él.</li>
+<li>Avisar a los servicios de emergencia (100 / 107 / 101 / 103).</li>
+<li>Esperar el recuento del personal por parte del responsable.</li>
+</ol>
+</div>
+</section>
+
+<section id="sec-vr"><h2>Emergencia en 360°</h2><p style="font-size:.86rem;margin-bottom:10px">Seguí los pasos numerados dentro de la escena real. Activá <b>📱 Mover con el celular</b> para mirar girando el teléfono.</p><div class="vrwrap" id="vr"></div><p class="credit">Panoramas 360° reales: Poly Haven (CC0) · Fotografías ilustrativas generadas con IA</p></section>
+<section id="protocolos">
+<h2>Protocolos por tipo de emergencia</h2>
+<details><summary><span class="tag t-fuego">INCENDIO</span>Fuego o principio de incendio</summary><div class="body">
+<ol class="steps">
+<li>Dar la alarma y avisar a Bomberos (100).</li>
+<li>Si el fuego es incipiente y tenés vía de escape detrás, usá el extintor (técnica PASA).</li>
+<li>Si el fuego supera un extintor o hay humo denso, NO insistas: evacuá.</li>
+<li>Cortá la energía del sector desde el tablero si es seguro.</li>
+<li>Cerrá puertas al salir para limitar la propagación.</li>
+<li>Nunca uses agua sobre fuego eléctrico o de combustibles (clase B/C).</li>
+</ol></div></details>
+<details><summary><span class="tag t-derr">DERRAME</span>Derrame de combustible o solvente</summary><div class="body">
+<ol class="steps">
+<li>Eliminar toda fuente de ignición: no fumar, no encender motores ni interruptores.</li>
+<li>Cortar el flujo o cerrar la válvula si es posible.</li>
+<li>Contener con material absorbente (arena, kit antiderrame).</li>
+<li>Ventilar el área; evitar que el producto llegue a desagües.</li>
+<li>Avisar al responsable y a Bomberos si el volumen es importante.</li>
+<li>Usar guantes de nitrilo y antiparras; no tocar sin protección.</li>
+</ol></div></details>
+<details><summary><span class="tag t-elec">ELÉCTRICO</span>Accidente / contacto eléctrico</summary><div class="body">
+<ol class="steps">
+<li>NO tocar a la víctima si sigue en contacto con la corriente.</li>
+<li>Cortar la energía desde el tablero o interruptor general.</li>
+<li>Si no se puede cortar, separar a la víctima con material aislante seco (madera).</li>
+<li>Llamar al 107 (Hospital) de inmediato.</li>
+<li>Si no respira, iniciar RCP si estás capacitado.</li>
+<li>No usar agua ni extintor de agua sobre equipos energizados.</li>
+</ol></div></details>
+<details><summary><span class="tag t-les">LESIONADO</span>Persona herida / accidente</summary><div class="body">
+<ol class="steps">
+<li>Evaluar la escena: que sea segura antes de acercarse.</li>
+<li>No mover al herido salvo peligro inminente.</li>
+<li>Llamar al 107 e informar ubicación y estado.</li>
+<li>Controlar hemorragias con presión directa (guantes).</li>
+<li>Abrigar a la persona y acompañarla hasta que llegue ayuda.</li>
+<li>Despejar el acceso para la ambulancia.</li>
+</ol></div></details>
+</section>
+<section id="pasa">
+<h2>Simulador: cómo usar un extintor (técnica PASA)</h2>
+<div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px"><img src="../img/fuego_escena.jpg" alt="Principio de incendio" style="width:100%;height:230px;object-fit:cover;display:block"><div style="position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.85));display:flex;flex-direction:column;justify-content:flex-end;padding:14px;color:#fff"><b style="font-size:1.05rem">Apagá un fuego real… en realidad aumentada</b><span style="font-size:.8rem;opacity:.9">La cámara muestra tu entorno y el fuego aparece delante tuyo. Tirá del pasador, apuntá a la base, apretá y abanicá.</span><div class="cta"><button class="btn btn-r" onclick="abrirSimulador()">🧯 Iniciar simulador</button></div></div></div>
+<p>Tocá cada letra para ver el paso. Primero asegurate de tener una salida detrás tuyo y de que el fuego sea incipiente.</p>
+<div class="pasa">
+<input type="radio" name="pasa" id="p1" checked>
+<input type="radio" name="pasa" id="p2">
+<input type="radio" name="pasa" id="p3">
+<input type="radio" name="pasa" id="p4">
+<div class="tabs">
+<label for="p1">P</label>
+<label for="p2">A</label>
+<label for="p3">S</label>
+<label for="p4">A</label>
+</div>
+<div class="panels">
+<div class="panel pn1"><div class="big">🧯</div><h4>P — Palanca</h4><p>Quitá el precinto y tirá del pasador de seguridad. Sostén el extintor en posición vertical.</p></div>
+<div class="panel pn2"><div class="big">🎯</div><h4>A — Apuntar</h4><p>Dirigí la manguera o boquilla hacia la BASE del fuego, no a las llamas. Paráte a unos 2-3 metros.</p></div>
+<div class="panel pn3"><div class="big">✊</div><h4>S — apretAr (Squeeze)</h4><p>Apretá el gatillo de forma firme y sostenida para liberar el agente extintor.</p></div>
+<div class="panel pn4"><div class="big">↔️</div><h4>A — Abanicar</h4><p>Mové la boquilla de lado a lado barriendo la base del fuego hasta apagarlo. Retirate sin dar la espalda.</p></div>
+</div>
+</div>
+<div class="card" style="margin-top:12px">
+<h3>⚠️ Cuándo NO usar el extintor</h3>
+<p>Si el fuego es más grande que un tacho, si hay mucho humo, si no tenés salida detrás o si el extintor se vacía sin controlarlo: <b>evacuá de inmediato</b> y dejá que actúen los bomberos.</p>
+</div>
+</section>
+
+<section id="roles">
+<h2>Roles durante la emergencia</h2>
+<div class="roles">
+<div class="role"><b>Responsable / Jefe de turno:</b> ordena la evacuación, llama a los servicios de emergencia y realiza el recuento del personal en el punto de encuentro.</div>
+<div class="role"><b>Brigada de emergencia:</b> ataca el principio de incendio con extintores, corta la energía y asiste la evacuación. Solo personal designado y capacitado.</div>
+<div class="role"><b>Primeros auxilios:</b> asiste a lesionados hasta la llegada de la ambulancia; mantiene el botiquín disponible.</div>
+<div class="role"><b>Todo el personal:</b> da la alarma, evacúa por la ruta más cercana, se dirige al punto de encuentro y no vuelve atrás.</div>
+</div>
+<div class="card" style="margin-top:10px"><p style="margin:0">Mientras el municipio no designe formalmente la brigada, el responsable de turno coordina y el resto evacúa. La designación de brigada y los simulacros son parte del plan de emergencia a implementar.</p></div>
+</section>
+
+<section id="dir">
+<h2>Directorio de emergencias</h2>
+<div class="dir">
+<a class="d1" href="tel:100">🚒 Bomberos<b>100</b>(03756) 448964</a>
+<a class="d2" href="tel:107">🏥 Hospital Susini<b>107</b>(03756) 586615</a>
+<a class="d3" href="tel:101">🚓 Policía<b>101</b>(03756) 557604</a>
+<a class="d4" href="tel:103">⚠️ Defensa Civil<b>103</b>Municipal</a>
+</div>
+<p style="font-size:.8rem;margin-top:10px;color:#666">Coordenadas del predio: lat. -28,062011 ; long. -56,015585. Bomberos a 1,8 km · Hospital a 2,2 km.</p>
+</section>
+
+<footer>
+Ley 19.587 · Dec. 351/79 Cap. 18 · Res. SRT 905/15 · IRAM 10005<br>
+Plan de contingencias — Corralón Municipal de Gobernador Virasoro
+</footer>
+<div class="emer">
+<a href="tel:100">🚒<b>100</b>Bomberos</a>
+<a href="tel:107">🏥<b>107</b>Hospital</a>
+<a href="tel:101">🚓<b>101</b>Policía</a>
+<a href="tel:103">⚠️<b>103</b>Def. Civil</a>
+</div>
+<script src="../lib/pannellum.js"></script><script src="../lib/vr.js"></script><script src="../lib/fuego.js"></script><script>var tour=VR({el:"vr",first:"taller",scenes:{"taller": {"title": "🔥 Taller: principio de incendio", "pano": "../pano/auto_service.jpg", "yaw": -30, "hs": [{"p": -10, "y": -45, "t": "risk", "i": "🔥", "title": "1 · Detectá el foco", "text": "Imaginá humo saliendo de los bancos con trapos y cartones. Mantené la calma y <b>dá la alarma a viva voz</b>: \"¡FUEGO EN EL TALLER!\"", "l": "Foco"}, {"p": 3, "y": -10, "t": "ext", "i": "🧯", "title": "2 · Tomá el extintor E-08", "text": "Solo si el fuego es incipiente (menor que un tacho) y tenés la salida <b>detrás tuyo</b>. Aplicá la técnica PASA. Probala en el simulador ⬇️", "l": "E-08"}, {"p": 15, "y": 95, "t": "elec", "i": "⚡", "title": "3 · Cortá la energía", "text": "Si es seguro, cortá la energía del sector desde el tablero. Nunca uses agua sobre equipos eléctricos.", "l": "Tablero"}, {"p": -2, "y": -145, "t": "exit", "i": "🏃", "title": "4 · Evacuá", "text": "Si el fuego crece o hay mucho humo: salí por aquí, sin correr y sin volver atrás. Cerrá la puerta si podés, para contener el humo.", "l": "Salida"}, {"p": -14, "y": 82, "t": "risk", "i": "🛞", "title": "Peligro: compresor y cilindros", "text": "Los recipientes a presión pueden explotar con el calor. Alejate y avisá a Bomberos de su ubicación.", "l": "Presión"}, {"p": -2, "y": 33, "t": "link", "i": "➡️", "title": "Sala de tableros", "text": "", "l": "Ir a la sala de tableros", "scene": "tableros"}]}, "tableros": {"title": "⚡ Sala de tableros", "pano": "../pano/distribution_board.jpg", "yaw": 80, "hs": [{"p": 8, "y": 105, "t": "elec", "i": "⚡", "title": "Tablero general: corte de energía", "text": "Ante incendio o accidente eléctrico, cortá desde el interruptor general. Si la víctima sigue en contacto, <b>NO la toques</b>: primero cortá la corriente.", "l": "Corte general"}, {"p": -25, "y": 40, "t": "risk", "i": "🧵", "title": "Cables sueltos en el piso", "text": "Riesgo de tropiezo y de contacto eléctrico. Separá a una víctima solo con material aislante seco (madera).", "l": "Cables"}, {"p": -12, "y": -25, "t": "info", "i": "🏥", "title": "Llamá al 107", "text": "Informá: \"Corralón Municipal, Calle J. R. Vidal, Gobernador Virasoro. Persona electrocutada, consciente / inconsciente\". Si no respira, RCP si estás capacitado.", "l": "107"}, {"p": -2, "y": 33, "t": "exit", "i": "🚪", "title": "Salida", "text": "Salida de la sala hacia el pasillo y el punto de encuentro.", "l": "Salida"}, {"p": -2, "y": -100, "t": "link", "i": "⬅️", "title": "Taller", "text": "", "l": "Volver al taller", "scene": "taller"}]}}});</script>
+</body>
+</html>

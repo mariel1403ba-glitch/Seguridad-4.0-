@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano y Distribución de Extintores — Corralón Municipal Virasoro</title>
+<style>
+:root{--rojo:#c0392b;--naranja:#e67e22;--amarillo:#f1c40f;--verde:#27ae60;--azul:#1f3a93;--bg:#f4f6f8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:#222;line-height:1.5;padding-bottom:90px}
+header{background:linear-gradient(135deg,#0b7a4b,#27ae60);color:#fff;padding:20px 16px}
+header .kick{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.9}
+header h1{font-size:1.25rem;margin:5px 0 3px}
+header .meta{font-size:.8rem;opacity:.9}
+section{padding:16px;max-width:960px;margin:0 auto}
+h2{font-size:1.1rem;color:var(--azul);margin-bottom:10px;border-left:5px solid var(--verde);padding-left:10px}
+.layers{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.layers label{flex:1;min-width:110px;text-align:center;background:#fff;border:2px solid #e2e6ea;border-radius:10px;padding:9px;font-size:.8rem;font-weight:600;cursor:pointer;color:#555}
+.layers input{display:none}
+#lr:checked~.wrap label[for=lr],#le:checked~.wrap label[for=le],#lv:checked~.wrap label[for=lv]{border-color:var(--azul);background:#eef2ff;color:var(--azul)}
+.maph{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:10px;overflow-x:auto}
+svg{width:100%;height:auto;min-width:560px;display:block}
+.sector{stroke:#fff;stroke-width:1.5}
+.slabel{font:600 9px 'Segoe UI';fill:#1a1a1a;pointer-events:none}
+.ssub{font:7px 'Segoe UI';fill:#333;pointer-events:none}
+.ext,.ruta,.riesgoDot{opacity:0;transition:opacity .25s}
+#le:checked~.wrap .ext{opacity:1}
+#lv:checked~.wrap .ruta{opacity:1}
+#lr:checked~.wrap .riesgoDot{opacity:1}
+.extm{fill:var(--rojo);stroke:#fff;stroke-width:1.5}
+.extt{font:700 8px 'Segoe UI';fill:#fff;pointer-events:none}
+.ruta path{stroke:var(--verde);stroke-width:3;stroke-dasharray:6 4;fill:none}
+.pe{fill:#1f3a93}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.76rem}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:13px;height:13px;border-radius:3px;display:inline-block}
+details{background:#fff;border-radius:10px;margin-bottom:7px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden}
+summary{cursor:pointer;padding:11px 13px;font-weight:600;font-size:.86rem;list-style:none;background:#f8f9fb}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'\25bc';float:right;font-size:.65rem;color:#999}
+details[open] summary::after{transform:rotate(180deg)}
+details .body{padding:11px 13px;font-size:.83rem}
+.pill{display:inline-block;background:var(--rojo);color:#fff;border-radius:6px;font-size:.7rem;font-weight:700;padding:2px 7px;margin-right:6px}
+.emer{position:fixed;bottom:0;left:0;right:0;background:var(--rojo);display:flex;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.2)}
+.emer a{flex:1;text-align:center;color:#fff;text-decoration:none;padding:10px 4px;font-size:.72rem;border-right:1px solid rgba(255,255,255,.25)}
+.emer a:last-child{border-right:none}.emer a b{display:block;font-size:1.05rem}
+footer{padding:16px;font-size:.72rem;color:#777;text-align:center}
+.note{font-size:.78rem;background:#e8f6ef;border-left:4px solid var(--verde);padding:10px 12px;border-radius:6px;margin-bottom:10px}
+</style>
+<link rel="stylesheet" href="../lib/pannellum.css"><link rel="stylesheet" href="../lib/vr.css"><meta name="theme-color" content="#111">
+</head>
+<body>
+
+<div class="hero"><img src="../img/plano_hero.jpg" alt="Plano y Distribución de Extintores"><span class="badge360">360° · Interactivo</span>
+<div class="ov" style="background:linear-gradient(180deg,rgba(0,0,0,0) 20%,rgba(5,60,35,.9))"><div class="kick">Anexo D · Recorrido virtual</div><h1>Plano y Distribución de Extintores</h1><p>Corralón Municipal de Gobernador Virasoro · 2.927,5 m². Recorré el predio en 360°, ubicá los extintores y las salidas.</p><div class="cta"><a class="btn btn-p" href="#sec-vr">🥽 Recorrido 360°</a><a class="btn btn-g" href="#mapa">🗺️ Plano interactivo</a><a class="btn btn-g" target="_blank" href="https://www.google.com/maps?q=-28.062011,-56.015585">📍 Cómo llegar</a></div></div></div>
+<section id="mapa"><h2>Plano interactivo</h2>
+<div class="note">Tocá una capa para alternar la vista. El croquis es funcional (no a escala arquitectónica real) y ubica los 20 sectores, los 15 puestos de extintores y las rutas de evacuación.</div>
+<input type="radio" name="layer" id="le" checked>
+<input type="radio" name="layer" id="lr">
+<input type="radio" name="layer" id="lv">
+<div class="wrap">
+<div class="layers">
+<label for="le">🧯 Extintores</label>
+<label for="lr">⚠️ Mapa de riesgos</label>
+<label for="lv">🧭 Rutas de evacuación</label>
+</div>
+<div class="maph">
+<svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="600" height="450" fill="#eef1f4"/>
+<text x="300" y="13" text-anchor="middle" font="600 10px Segoe UI" fill="#1f3a93">↑ ACCESO NORTE · Calle J. R. Vidal</text>
+<!-- Grupo 1 Oficinas (izquierda) -->
+<g>
+<rect class="sector" x="15" y="22" width="80" height="46" fill="#27ae60"/><text class="slabel" x="55" y="42" text-anchor="middle">S-1</text><text class="ssub" x="55" y="54" text-anchor="middle">Garita</text>
+<rect class="sector" x="15" y="70" width="80" height="34" fill="#e67e22"/><text class="slabel" x="55" y="90" text-anchor="middle">S-2 Of.1</text>
+<rect class="sector" x="15" y="106" width="38" height="30" fill="#27ae60"/><text class="ssub" x="34" y="124" text-anchor="middle">S-3 Baño</text>
+<rect class="sector" x="55" y="106" width="40" height="30" fill="#27ae60"/><text class="ssub" x="75" y="124" text-anchor="middle">S-4 Adm</text>
+<rect class="sector" x="15" y="138" width="38" height="30" fill="#27ae60"/><text class="ssub" x="34" y="156" text-anchor="middle">S-5 Of.2</text>
+<rect class="sector" x="55" y="138" width="40" height="30" fill="#27ae60"/><text class="ssub" x="75" y="156" text-anchor="middle">S-6 Of.4</text>
+</g>
+<!-- Grupo 2 Servicios -->
+<rect class="sector" x="15" y="175" width="80" height="34" fill="#f1c40f"/><text class="slabel" x="55" y="190" text-anchor="middle">S-7</text><text class="ssub" x="55" y="202" text-anchor="middle">Esp. verdes</text>
+<rect class="sector" x="15" y="211" width="38" height="34" fill="#c0392b"/><text class="ssub" x="34" y="230" text-anchor="middle">S-11 Baño</text>
+<rect class="sector" x="55" y="211" width="40" height="34" fill="#e67e22"/><text class="ssub" x="75" y="230" text-anchor="middle">S-12 Com.</text>
+<!-- Grupo 3 Depósitos y pañoles (centro) -->
+<rect class="sector" x="120" y="70" width="55" height="42" fill="#f1c40f"/><text class="ssub" x="147" y="88" text-anchor="middle">S-8 Def.</text><text class="ssub" x="147" y="99" text-anchor="middle">Civil</text>
+<rect class="sector" x="120" y="114" width="55" height="40" fill="#f1c40f"/><text class="ssub" x="147" y="136" text-anchor="middle">S-9 Pañol</text>
+<rect class="sector" x="120" y="156" width="55" height="44" fill="#e67e22"/><text class="ssub" x="147" y="176" text-anchor="middle">S-16 Pint.</text><text class="ssub" x="147" y="187" text-anchor="middle">Solventes</text>
+<rect class="sector" x="120" y="202" width="55" height="48" fill="#c0392b"/><text class="ssub" x="147" y="222" text-anchor="middle">S-17 Cist.</text><text class="ssub" x="147" y="233" text-anchor="middle">Combust.</text>
+<!-- Grupo 4 Talleres -->
+<rect class="sector" x="180" y="70" width="60" height="40" fill="#27ae60"/><text class="ssub" x="210" y="92" text-anchor="middle">S-10 Alum.</text>
+<rect class="sector" x="180" y="112" width="60" height="42" fill="#f1c40f"/><text class="ssub" x="210" y="136" text-anchor="middle">S-13 Herr.</text>
+<rect class="sector" x="180" y="156" width="60" height="46" fill="#e67e22"/><text class="slabel" x="210" y="176" text-anchor="middle">S-14</text><text class="ssub" x="210" y="188" text-anchor="middle">Taller mec.</text>
+<rect class="sector" x="180" y="204" width="60" height="46" fill="#f1c40f"/><text class="ssub" x="210" y="224" text-anchor="middle">S-15 Lubr.</text>
+<!-- Grupo 5 áreas abiertas -->
+<rect class="sector" x="250" y="70" width="335" height="120" fill="#e67e22" fill-opacity=".55"/><text class="slabel" x="417" y="128" text-anchor="middle">S-18 Estacionamiento y flota pesada</text>
+<rect class="sector" x="250" y="194" width="150" height="90" fill="#e67e22" fill-opacity=".55"/><text class="ssub" x="325" y="240" text-anchor="middle">S-19 Obras / chatarra</text>
+<rect class="sector" x="405" y="194" width="180" height="235" fill="#f1c40f" fill-opacity=".55"/><text class="slabel" x="495" y="310" text-anchor="middle">S-20</text><text class="ssub" x="495" y="324" text-anchor="middle">Motos secuestradas</text>
+<rect class="sector" x="15" y="255" width="385" height="174" fill="#dfe6ea"/><text class="ssub" x="207" y="345" text-anchor="middle" fill="#7f8c8d">Playa / circulación interna</text>
+<!-- Punto de encuentro -->
+<circle class="pe" cx="55" cy="12" r="6"/><text class="ssub" x="66" y="15" fill="#1f3a93">Punto de encuentro</text>
+<!-- Rutas de evacuación -->
+<g class="ruta">
+<path d="M210 230 L140 230 L100 180 L55 120 L55 30"/>
+<path d="M495 300 L300 270 L130 260 L60 180 L55 30"/>
+<path d="M417 150 L250 200 L120 240 L60 180 L55 30"/>
+<polygon points="50,30 60,30 55,20" fill="#27ae60"/>
+</g>
+<!-- Marcadores de riesgo crítico/alto -->
+<g class="riesgoDot">
+<circle cx="34" cy="228" r="8" fill="#c0392b" stroke="#fff" stroke-width="1.5"/><text class="extt" x="34" y="231" text-anchor="middle">25</text>
+<circle cx="147" cy="226" r="8" fill="#c0392b" stroke="#fff" stroke-width="1.5"/><text class="extt" x="147" y="229" text-anchor="middle">20</text>
+<circle cx="210" cy="180" r="8" fill="#e67e22" stroke="#fff" stroke-width="1.5"/><text class="extt" x="210" y="183" text-anchor="middle">16</text>
+<circle cx="417" cy="130" r="8" fill="#e67e22" stroke="#fff" stroke-width="1.5"/><text class="extt" x="417" y="133" text-anchor="middle">16</text>
+</g>
+<!-- Puestos de extintores E-01..E-15 -->
+<g class="ext">
+<circle class="extm" cx="80" cy="46" r="9"/><text class="extt" x="80" y="49" text-anchor="middle">1</text>
+<circle class="extm" cx="102" cy="122" r="9"/><text class="extt" x="102" y="125" text-anchor="middle">2</text>
+<circle class="extm" cx="88" cy="152" r="9"/><text class="extt" x="88" y="155" text-anchor="middle">3</text>
+<circle class="extm" cx="88" cy="228" r="9"/><text class="extt" x="88" y="231" text-anchor="middle">4</text>
+<circle class="extm" cx="165" cy="112" r="9"/><text class="extt" x="165" y="115" text-anchor="middle">5</text>
+<circle class="extm" cx="232" cy="133" r="9"/><text class="extt" x="232" y="136" text-anchor="middle">6</text>
+<circle class="extm" cx="565" cy="215" r="9"/><text class="extt" x="565" y="218" text-anchor="middle">7</text>
+<circle class="extm" cx="190" cy="166" r="9"/><text class="extt" x="190" y="169" text-anchor="middle">8</text>
+<circle class="extm" cx="190" cy="214" r="9"/><text class="extt" x="190" y="217" text-anchor="middle">9</text>
+<circle class="extm" cx="235" cy="244" r="9"/><text class="extt" x="235" y="247" text-anchor="middle">10</text>
+<circle class="extm" cx="130" cy="166" r="9"/><text class="extt" x="130" y="169" text-anchor="middle">11</text>
+<circle class="extm" cx="130" cy="212" r="9"/><text class="extt" x="130" y="215" text-anchor="middle">12</text>
+<circle class="extm" cx="300" cy="85" r="9"/><text class="extt" x="300" y="88" text-anchor="middle">13</text>
+<circle class="extm" cx="385" cy="200" r="9"/><text class="extt" x="385" y="203" text-anchor="middle">14</text>
+<circle class="extm" cx="420" cy="410" r="9"/><text class="extt" x="420" y="413" text-anchor="middle">15</text>
+</g>
+<!--SVGEXT-->
+</svg>
+</div>
+<div class="legend">
+<span><i class="dot" style="background:#c0392b"></i>Crítico</span>
+<span><i class="dot" style="background:#e67e22"></i>Alto</span>
+<span><i class="dot" style="background:#f1c40f"></i>Moderado</span>
+<span><i class="dot" style="background:#27ae60"></i>Bajo</span>
+<span><i class="dot" style="background:#c0392b;border-radius:50%"></i>Puesto de extintor</span>
+<span><i class="dot" style="background:#27ae60;border-radius:50%"></i>Ruta / salida</span>
+</div>
+<!--SVGLEG-->
+</div>
+</section>
+<section id="sec-vr"><h2>Recorrido virtual 360°</h2><p style="font-size:.86rem;margin-bottom:10px">Mirá alrededor como si estuvieras en el lugar: arrastrá, o activá <b>📱 Mover con el celular</b> y girá con el teléfono. Tocá los puntos: 🧯 extintores, ⚠️ riesgos, 🏃 salidas, ➡️ cambiar de sector.</p><div class="vrwrap" id="vr"></div><p class="credit">Panoramas 360° reales: Poly Haven (CC0) · Fotografías ilustrativas generadas con IA</p></section>
+<section>
+<h2>Detalle de los 15 puestos de extintores</h2>
+<p style="font-size:.85rem;margin-bottom:10px">Dotación normativa según IRAM 3517-2. Tocá cada puesto para ver agente, capacidad, radio y ubicación.</p>
+<details><summary><span class="pill">E-01</span>Garita de entrada (S-1)</summary><div class="body">PQS ABC / CO₂ 10 kg · radio 15 m. Interior de garita, muro este, con chapa baliza IRAM 10005.</div></details>
+<details><summary><span class="pill">E-02</span>Pasillo oficinas (S-2 a S-5)</summary><div class="body">PQS ABC 10 kg · radio 20 m. Pasillo central común de distribución de oficinas.</div></details>
+<details><summary><span class="pill">E-03</span>Oficina 4 (S-6)</summary><div class="body">PQS ABC 10 kg · radio 20 m. Frente a Oficina 4, muro exterior accesible. Existente vigente.</div></details>
+<details><summary><span class="pill">E-04</span>Comedor (S-12, cubre S-11 y S-7)</summary><div class="body">PQS ABC 5 kg · radio 20 m. Interior del comedor junto al acceso. Existente vigente.</div></details>
+<details><summary><span class="pill">E-05</span>Alumbrado / Defensa Civil (S-10/S-8)</summary><div class="body">PQS ABC 10 kg · radio 20 m. Pasillo exterior. Vigente, DESPEJAR obstrucción.</div></details>
+<details><summary><span class="pill">E-06</span>Herrería (S-13)</summary><div class="body">PQS ABC 10 kg · radio 15 m. Lateral este de la nave, sobre columna. Existente vigente.</div></details>
+<details><summary><span class="pill">E-07</span>Fondo del predio este (S-20)</summary><div class="body">PQS ABC en gabinete intemperie 10 kg · radio 20 m. Poste perimetral sureste.</div></details>
+<details><summary><span class="pill">E-08</span>Taller mecánico (S-14)</summary><div class="body">PQS ABC 10 kg · radio 15 m. Ingreso al taller sobre parante estructural. RECARGA (actual vencido).</div></details>
+<details><summary><span class="pill">E-09</span>Depósito 1 lubricantes (S-15)</summary><div class="body">PQS ABC 10 kg · radio 15 m. Muro exterior de acceso. RECARGA.</div></details>
+<details><summary><span class="pill">E-10</span>Carro rodante (S-15)</summary><div class="body">PQS BC carro rodante 50 kg · radio 15 m. Dársena de depósitos. DESPEJAR del encierro.</div></details>
+<details><summary><span class="pill">E-11</span>Pañol general pinturas (S-16)</summary><div class="body">PQS ABC 10 kg · radio 15 m. Ingreso a pañol general. Vigente, DESPEJAR.</div></details>
+<details><summary><span class="pill">E-12</span>Cisterna de combustibles (S-17)</summary><div class="body">PQS ABC en gabinete intemperie 10 kg · radio 15 m. Exterior de cisterna, sobre parante con descarga a tierra.</div></details>
+<details><summary><span class="pill">E-13</span>Playa norte (S-18)</summary><div class="body">PQS ABC en gabinete intemperie 10 kg · radio 15 m. Poste perimetral este.</div></details>
+<details><summary><span class="pill">E-14</span>Playa sur y chatarra (S-18/S-19)</summary><div class="body">PQS ABC en gabinete intemperie 10 kg · radio 20 m. Poste perimetral central este.</div></details>
+<details><summary><span class="pill">E-15</span>Fondo del predio oeste (S-20)</summary><div class="body">PQS ABC en gabinete intemperie 10 kg · radio 20 m. Muro perimetral sur sobre Calle Santo de la Espada.</div></details>
+<div class="note" style="margin-top:12px">Verificar sobre plano que ningún punto quede a más de 20 m de un extintor (15 m en riesgo clase B) y que el potencial extintor cumpla las Tablas 1 y 2 del Anexo VII.</div>
+</section>
+<footer>
+Ley 19.587 · Dec. 351/79 Anexo VII · IRAM 3517-2 · Res. SRT 905/15 · IRAM 10005<br>
+Punto de encuentro seguro: Calle J. R. Vidal, frente a garita S-1 (acceso norte)
+</footer>
+<div class="emer">
+<a href="tel:100">🚒<b>100</b>Bomberos</a>
+<a href="tel:107">🏥<b>107</b>Hospital</a>
+<a href="tel:101">🚓<b>101</b>Policía</a>
+<a href="tel:103">⚠️<b>103</b>Def. Civil</a>
+</div>
+<script src="../lib/pannellum.js"></script><script src="../lib/vr.js"></script><script>var tour=VR({el:"vr",first:"playa",scenes:{"playa": {"title": "🌳 Playa y acceso", "pano": "../pano/factory_yard.jpg", "yaw": -20, "hs": [{"p": 2, "y": -82, "t": "risk", "i": "🧱", "title": "Acopio de materiales (S-19)", "text": "Pilas de bloques y materiales de obra. Riesgo ALTO de caída de objetos y tropiezos. Apilar a no más de 1,8 m y dejar pasillos de 1,1 m libres.", "l": "S-19 Obras"}, {"p": -6, "y": -25, "t": "ext", "i": "🧯", "title": "Puesto E-13 · Playa norte", "text": "Extintor PQS ABC 10 kg en gabinete intemperie, poste perimetral este. Radio de cobertura 15 m. Señalizado con chapa baliza IRAM 10005.", "l": "E-13"}, {"p": -4, "y": 8, "t": "risk", "i": "⛏️", "title": "Zona de obra / arena", "text": "Área de trabajo con maquinaria. Usar chaleco reflectivo y respetar a los vehículos en maniobra: el peatón siempre por la senda.", "l": "Obras"}, {"p": 16, "y": 82, "t": "elec", "i": "⚡", "title": "Línea eléctrica aérea", "text": "Riesgo eléctrico: nunca elevar la caja volcadora ni brazos de máquinas debajo de cables. Mantener distancia mínima de 3 m.", "l": "Cables aéreos"}, {"p": 2, "y": 115, "t": "info", "i": "🏢", "title": "Oficinas y garita (S-1 a S-6)", "text": "Sector administrativo. Extintores E-01 (garita), E-02 (pasillo) y E-03 (Oficina 4). Riesgo bajo.", "l": "Oficinas · E-01/E-02"}, {"p": -12, "y": -150, "t": "exit", "i": "🏃", "title": "Ruta de evacuación → Punto de encuentro", "text": "Seguí la senda hacia el ACCESO NORTE. Punto de encuentro: Calle J. R. Vidal, frente a garita S-1. Caminar sin correr y no volver atrás.", "l": "Salida"}, {"p": -4, "y": 150, "t": "link", "i": "➡️", "title": "Galpón de flota", "text": "", "l": "Ir al galpón de flota", "scene": "galpon"}, {"p": -3, "y": 35, "t": "link", "i": "➡️", "title": "Taller mecánico", "text": "", "l": "Ir al taller", "scene": "taller"}]}, "galpon": {"title": "🚌 Galpón de flota", "pano": "../pano/old_bus_depot.jpg", "yaw": 120, "hs": [{"p": 2, "y": 140, "t": "risk", "i": "🚌", "title": "Flota pesada (S-18) · Riesgo 16", "text": "Estacionamiento de camiones y colectivos: riesgo ALTO de incendio por combustibles y de atropello. Estacionar en posición de salida, con freno de mano y sin obstruir extintores.", "l": "S-18 Flota"}, {"p": -2, "y": -60, "t": "ext", "i": "🧯", "title": "Puesto E-14 · Playa sur", "text": "Extintor PQS ABC 10 kg en gabinete intemperie sobre columna. Radio 20 m. Mantener 1 m libre alrededor.", "l": "E-14"}, {"p": 4, "y": -95, "t": "exit", "i": "🚪", "title": "Salida de emergencia", "text": "Portón de salida hacia la playa y la ruta de evacuación al ACCESO NORTE. Debe permanecer siempre libre y destrabado.", "l": "Salida"}, {"p": 0, "y": 70, "t": "info", "i": "📏", "title": "Pasillos despejados", "text": "Mantener circulación peatonal de 1,1 m mínimo entre vehículos y columnas. Demarcar con pintura amarilla.", "l": "Circulación"}, {"p": -28, "y": -150, "t": "risk", "i": "🪵", "title": "Orden y limpieza", "text": "Restos de madera y escombros en el piso: riesgo de tropiezo y carga de fuego. Retirar al final de cada jornada.", "l": "Escombros"}, {"p": -2, "y": 0, "t": "link", "i": "⬅️", "title": "Playa", "text": "", "l": "Volver a la playa", "scene": "playa"}, {"p": -2, "y": -30, "t": "link", "i": "➡️", "title": "Taller", "text": "", "l": "Ir al taller", "scene": "taller"}]}, "taller": {"title": "🔧 Taller mecánico", "pano": "../pano/auto_service.jpg", "yaw": -20, "hs": [{"p": 3, "y": -10, "t": "ext", "i": "🧯", "title": "Puesto E-08 · Taller mecánico (S-14)", "text": "PQS ABC 10 kg, radio 15 m, al ingreso del taller sobre parante estructural. Estado: RECARGA (vencido). Reemplazar de inmediato.", "l": "E-08"}, {"p": -12, "y": -50, "t": "risk", "i": "📦", "title": "Carga de fuego acumulada", "text": "Bancos con cartones, trapos con grasa y envases: riesgo de incendio clase A/B. Trapos en recipiente metálico con tapa.", "l": "Riesgo 16"}, {"p": -8, "y": 17, "t": "risk", "i": "🔥", "title": "Fuente de calor", "text": "Estufa / caño de escape cerca de materiales: mantener 1 m libre de combustibles.", "l": "Calor"}, {"p": -12, "y": 82, "t": "risk", "i": "🛞", "title": "Compresor", "text": "Equipo a presión: verificar válvula de seguridad y purgar diariamente. No dirigir aire comprimido al cuerpo.", "l": "Compresor"}, {"p": 15, "y": 95, "t": "elec", "i": "⚡", "title": "Instalación eléctrica", "text": "Cables a la vista sobre la pared: riesgo de cortocircuito. Canalizar, usar tableros con disyuntor diferencial y puesta a tierra.", "l": "Eléctrico"}, {"p": -2, "y": -145, "t": "exit", "i": "🚪", "title": "Salida → Playa", "text": "Salida principal del taller hacia la playa y el punto de encuentro (Acceso Norte).", "l": "Salida"}, {"p": -3, "y": 33, "t": "link", "i": "➡️", "title": "Playa", "text": "", "l": "Volver a la playa", "scene": "playa"}]}}});</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Operativa «Trabajar Seguro» — Corralón Municipal Virasoro</title>
+<style>
+:root{--azul:#1f3a93;--naranja:#e67e22;--verde:#27ae60;--rojo:#c0392b;--bg:#f4f6f8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:#222;line-height:1.5;padding-bottom:90px}
+header{background:linear-gradient(135deg,#b35410,#e67e22);color:#fff;padding:20px 16px}
+header .kick{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.9}
+header h1{font-size:1.25rem;margin:5px 0 3px}
+header .meta{font-size:.8rem;opacity:.9}
+section{padding:16px;max-width:900px;margin:0 auto}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.filters label{background:#fff;border:2px solid #e2e6ea;border-radius:20px;padding:7px 13px;font-size:.78rem;font-weight:600;cursor:pointer;color:#666}
+.filters input{display:none}
+#f0:checked~.ctrl label[for=f0],#f1:checked~.ctrl label[for=f1],#f2:checked~.ctrl label[for=f2],#f3:checked~.ctrl label[for=f3],#f4:checked~.ctrl label[for=f4]{background:var(--naranja);border-color:#b35410;color:#fff}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:12px;overflow:hidden}
+.card .top{display:flex;align-items:center;gap:11px;padding:13px 15px;background:#fff8f1}
+.card .ic{font-size:1.5rem}
+.card .ti{font-weight:700;font-size:.95rem;color:#2c3e50}
+.card .gold{background:#fff6e5;border-left:4px solid var(--naranja);margin:0 15px 12px;padding:9px 12px;border-radius:6px;font-size:.86rem}
+.card .gold b{color:var(--rojo)}
+.card .rows{padding:0 15px 14px;font-size:.85rem}
+.card .row{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid #f0f2f5}
+.card .row:last-child{border-bottom:none}
+.card .row .k{flex:0 0 90px;color:var(--azul);font-weight:600}
+.hidecard{display:none}
+#f1:checked~.list .card{display:none}#f1:checked~.list .c-elec{display:block}
+#f2:checked~.list .card{display:none}#f2:checked~.list .c-comb{display:block}
+#f3:checked~.list .card{display:none}#f3:checked~.list .c-mec{display:block}
+#f4:checked~.list .card{display:none}#f4:checked~.list .c-quim{display:block}
+footer{padding:16px;font-size:.72rem;color:#777;text-align:center}
+.note{font-size:.8rem;background:#e8f6ef;border-left:4px solid var(--verde);padding:11px 13px;border-radius:6px;margin-bottom:14px}
+.emer{position:fixed;bottom:0;left:0;right:0;background:var(--rojo);display:flex;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.2)}
+.emer a{flex:1;text-align:center;color:#fff;text-decoration:none;padding:10px 4px;font-size:.72rem;border-right:1px solid rgba(255,255,255,.25)}
+.emer a:last-child{border-right:none}.emer a b{display:block;font-size:1.05rem}
+</style>
+<link rel="stylesheet" href="../lib/pannellum.css"><link rel="stylesheet" href="../lib/vr.css"><meta name="theme-color" content="#111">
+</head>
+<body>
+<div class="hero"><img src="../img/seguro_hero.jpg" alt="Trabajar Seguro"><span class="badge360">360° · Interactivo</span>
+<div class="ov" style="background:linear-gradient(180deg,rgba(0,0,0,0) 20%,rgba(100,45,5,.9))"><div class="kick">Anexo E · Guía Operativa</div><h1>Trabajar Seguro</h1><p>Reglas de oro, pasos previos y EPP por tarea. Cazá los riesgos en un taller real en 360° y equipá al trabajador.</p><div class="cta"><a class="btn btn-p" href="#sec-vr">🔎 Cazá los riesgos 360°</a><a class="btn btn-g" href="#epp">🦺 Equipá al trabajador</a></div></div></div>
+<section id="sec-vr"><h2>🔎 Cazá los riesgos en 360°</h2><p style="font-size:.86rem;margin-bottom:10px">Estás dentro de un taller real. Buscá los <b>❔</b> escondidos alrededor tuyo (girá con el dedo o con <b>📱 el celular</b>) y descubrí cada riesgo y su medida preventiva.</p><div class="vrwrap" id="vr"></div><p class="credit">Panoramas 360° reales: Poly Haven (CC0) · Fotografías ilustrativas generadas con IA</p></section>
+<section id="epp"><h2 style="font-size:1.1rem;color:#1f3a93;margin-bottom:10px;border-left:5px solid #e67e22;padding-left:10px">🦺 Juego: equipá al trabajador</h2>
+<p style="font-size:.85rem;margin-bottom:10px">Elegí la tarea, marcá los elementos de protección personal que corresponden y tocá <b>Verificar</b>.</p>
+<div class="epp"><div class="tasks"></div><div class="scene"><img alt=""><div class="cap"></div></div><div class="items"></div>
+<div class="cta"><button class="btn btn-o" id="eppv">✔ Verificar</button><button class="btn" style="background:#eee" id="eppr">↺ Reiniciar</button></div><div class="res"></div></div></section>
+<script>
+(function(){
+var I={casco:['⛑️','Casco'],anti:['🥽','Antiparras'],facial:['🛡️','Protector facial'],careta:['👺','Careta de soldar'],aud:['🎧','Protector auditivo'],resp:['😷','Respirador vapores'],gdiel:['🧤','Guantes dieléctricos'],gcorte:['🧤','Guantes anticorte'],gnitr:['🧤','Guantes de nitrilo'],gdesc:['🧤','Guantes de descarne'],delantal:['🥼','Delantal de descarne'],chaleco:['🦺','Chaleco reflectivo'],calzado:['🥾','Calzado de seguridad'],cdiel:['🥾','Calzado dieléctrico'],algodon:['👕','Ropa de algodón']};
+var T=[{n:'🔥 Soldadura',img:'../img/t_mecanica.jpg',ok:['careta','delantal','gdesc','resp','calzado']},
+{n:'⚡ Tablero eléctrico',img:'../img/t_electrico.jpg',ok:['gdiel','facial','cdiel']},
+{n:'⛽ Combustibles',img:'../img/t_combustible.jpg',ok:['gnitr','anti','algodon']},
+{n:'🎨 Pinturas',img:'../img/t_quimicos.jpg',ok:['resp','gnitr','anti']},
+{n:'⚙️ Amoladora',img:'../img/seguro_hero.jpg',ok:['anti','facial','aud','gcorte']}];
+var root=document.querySelector('.epp'),cur=0,sel={};
+function render(){root.querySelector('.tasks').innerHTML=T.map(function(t,i){return '<button class="'+(i===cur?'on':'')+'" data-i="'+i+'">'+t.n+'</button>'}).join('');
+root.querySelector('.scene img').src=T[cur].img;root.querySelector('.cap').textContent='Tarea: '+T[cur].n.replace(/^\S+ /,'')+' — ¿qué EPP necesita?';
+root.querySelector('.items').innerHTML=Object.keys(I).map(function(k){return '<button data-k="'+k+'" class="'+(sel[k]?'sel':'')+'"><b>'+I[k][0]+'</b>'+I[k][1]+'</button>'}).join('');
+var r=root.querySelector('.res');r.style.display='none';}
+root.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+if(b.dataset.i){cur=+b.dataset.i;sel={};render();}
+else if(b.dataset.k){sel[b.dataset.k]=!sel[b.dataset.k];b.className=sel[b.dataset.k]?'sel':'';root.querySelector('.res').style.display='none';}});
+document.getElementById('eppr').onclick=function(){sel={};render();};
+document.getElementById('eppv').onclick=function(){var ok=T[cur].ok,good=0,bad=0,miss=0;
+root.querySelectorAll('.items button').forEach(function(b){var k=b.dataset.k,need=ok.indexOf(k)>=0;
+if(sel[k]&&need){b.className='ok';good++}else if(sel[k]&&!need){b.className='bad';bad++}else if(need){b.className='miss';miss++}});
+var r=root.querySelector('.res');r.style.display='block';
+if(!bad&&!miss){r.style.background='#e8f6ef';r.innerHTML='✅ <b>¡Perfecto!</b> El trabajador está protegido para esta tarea. Recordá registrar la entrega de EPP (Res. SRT 299/11).';if(navigator.vibrate)navigator.vibrate([40,40,40]);}
+else{r.style.background='#fff3e6';r.innerHTML='⚠️ Acertaste '+good+' de '+ok.length+'. '+(miss?'<b>Faltan</b> los marcados con borde punteado. ':'')+(bad?'Los marcados en rojo <b>no son</b> los adecuados para esta tarea.':'');}};
+render();})();
+</script>
+<section>
+<h2 style="font-size:1.1rem;color:#1f3a93;margin-bottom:10px;border-left:5px solid #e67e22;padding-left:10px">Reglas de oro por tarea</h2>
+<div class="note"><b>Ninguna tarea es tan urgente como para hacerla sin seguridad.</b> Antes de empezar: pará y evaluá el entorno (cables, piso, vehículos en maniobra).</div>
+<input type="radio" name="flt" id="f0" checked>
+<input type="radio" name="flt" id="f1">
+<input type="radio" name="flt" id="f2">
+<input type="radio" name="flt" id="f3">
+<input type="radio" name="flt" id="f4">
+<div class="ctrl">
+<div class="filters">
+<label for="f0">Todas</label>
+<label for="f1">⚡ Eléctrico</label>
+<label for="f2">⛽ Combustibles</label>
+<label for="f3">🔧 Mecánica</label>
+<label for="f4">⚗️ Químicos</label>
+</div>
+</div>
+<div class="list">
+<div class="card"><div class="top"><span class="ic">🛡️</span><span class="ti">Todas las tareas</span></div><div class="gold"><b>Regla de oro:</b> ninguna tarea es tan urgente como para hacerla sin seguridad.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Parar y evaluar el entorno: cables, piso, vehículos en maniobra.</span></div><div class="row"><span class="k">EPP</span><span>Calzado de seguridad, ropa de trabajo; casco si hay riesgo de caída de objetos.</span></div></div></div>
+
+<div class="card c-mec"><div class="top"><span class="ic">🚚</span><span class="ti">Maquinaria, camiones y escaleras</span></div><div class="gold"><b>Regla de oro:</b> tres puntos de apoyo en todo momento.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Subir y bajar siempre de frente a la máquina.</span></div><div class="row"><span class="k">EPP</span><span>Calzado antideslizante, guantes con buen agarre.</span></div></div></div>
+
+<div class="card c-elec"><div class="top"><span class="ic">⚡</span><span class="ti">Tableros y riesgo eléctrico</span></div><img class="photo" src="../img/t_electrico.jpg" alt="Tableros y riesgo eléctrico" loading="lazy"><div class="gold"><b>Regla de oro:</b> todo conductor tiene tensión hasta comprobar lo contrario con instrumento.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Verificar contratapa y puerta del tablero; aplicar bloqueo y etiquetado (LOTO).</span></div><div class="row"><span class="k">EPP</span><span>Guantes dieléctricos de la clase adecuada, protección facial, calzado dieléctrico.</span></div></div></div>
+
+<div class="card c-comb"><div class="top"><span class="ic">⛽</span><span class="ti">Despacho de combustibles</span></div><img class="photo" src="../img/t_combustible.jpg" alt="Despacho de combustibles" loading="lazy"><div class="gold"><b>Regla de oro:</b> conectar la puesta a tierra antes de abrir. Sin fuentes de ignición cerca.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Motor detenido, contacto cortado.</span></div><div class="row"><span class="k">EPP</span><span>Guantes de nitrilo, antiparras, ropa de algodón.</span></div></div></div>
+
+<div class="card c-mec"><div class="top"><span class="ic">🔥</span><span class="ti">Soldadura y oxicorte</span></div><img class="photo" src="../img/t_mecanica.jpg" alt="Soldadura y oxicorte" loading="lazy"><div class="gold"><b>Regla de oro:</b> despejar 10 m de combustibles; viga 30 min al terminar.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Firmar el Permiso de Trabajo en Caliente.</span></div><div class="row"><span class="k">EPP</span><span>Careta fotosensible, delantal y guantes de descarne, protección respiratoria para humos.</span></div></div></div>
+<div class="card c-mec"><div class="top"><span class="ic">⚙️</span><span class="ti">Amoladoras</span></div><div class="gold"><b>Regla de oro:</b> nunca retirar la guarda. Disco apto para las RPM de la máquina.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Verificar guarda y estado del disco.</span></div><div class="row"><span class="k">EPP</span><span>Antiparras y protector facial, protector auditivo, guantes.</span></div></div></div>
+
+<div class="card c-mec"><div class="top"><span class="ic">🔧</span><span class="ti">Mecánica pesada y fosas</span></div><div class="gold"><b>Regla de oro:</b> nunca trabajar bajo un vehículo apoyado solo en el cric.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Calzar ruedas y colocar caballetes.</span></div><div class="row"><span class="k">EPP</span><span>Calzado de seguridad, antiparras, guantes.</span></div></div></div>
+
+<div class="card"><div class="top"><span class="ic">♻️</span><span class="ti">Recolección de residuos</span></div><div class="gold"><b>Regla de oro:</b> no empujar ni comprimir bolsas con manos o pies.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Colocarse guantes anticorte.</span></div><div class="row"><span class="k">EPP</span><span>Guantes anticorte, calzado de seguridad, chaleco reflectivo.</span></div></div></div>
+
+<div class="card c-quim"><div class="top"><span class="ic">🎨</span><span class="ti">Pinturas y solventes</span></div><img class="photo" src="../img/t_quimicos.jpg" alt="Pinturas y solventes" loading="lazy"><div class="gold"><b>Regla de oro:</b> leer la ficha de datos de seguridad antes de usar un producto.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Verificar ventilación y envases cerrados.</span></div><div class="row"><span class="k">EPP</span><span>Respirador con filtro para vapores orgánicos, guantes de nitrilo, antiparras.</span></div></div></div>
+
+<div class="card c-quim"><div class="top"><span class="ic">🧹</span><span class="ti">Limpieza</span></div><div class="gold"><b>Regla de oro:</b> no mezclar lavandina con amoníaco ni ácidos: libera gases tóxicos.</div><div class="rows"><div class="row"><span class="k">Antes</span><span>Colocar el cartel de piso mojado.</span></div><div class="row"><span class="k">EPP</span><span>Guantes de caña larga, calzado antideslizante.</span></div></div></div>
+</div>
+<div class="note" style="margin-top:4px">La entrega de EPP debe registrarse en el formulario de la Res. SRT 299/11.</div>
+<footer>
+Anexo E · Ley 19.587 · Dec. 351/79 Cap. 21 (Capacitación) · Res. SRT 299/11<br>
+Guía operativa — Corralón Municipal de Gobernador Virasoro
+</footer>
+<div class="emer">
+<a href="tel:100">🚒<b>100</b>Bomberos</a>
+<a href="tel:107">🏥<b>107</b>Hospital</a>
+<a href="tel:101">🚓<b>101</b>Policía</a>
+<a href="tel:103">⚠️<b>103</b>Def. Civil</a>
+</div>
+
+</section>
+<script src="../lib/pannellum.js"></script><script src="../lib/vr.js"></script><script>var tour=VR({el:"vr",first:"nave",scenes:{"nave": {"title": "🏭 Nave de producción", "pano": "../pano/industrial_workshop_foundry.jpg", "yaw": 0, "hs": [{"p": 0, "y": 55, "t": "risk", "i": "🔥", "title": "Soldadura: cortinas de protección", "text": "Las cortinas amarillas protegen a los demás de la radiación del arco. Antes de soldar: Permiso de Trabajo en Caliente, despejar 10 m de combustibles y vigilancia 30 min al terminar.", "l": "Soldadura"}, {"p": 28, "y": 50, "t": "risk", "i": "🏗️", "title": "Puente grúa", "text": "Nunca pasar ni trabajar debajo de una carga suspendida. Verificar eslingas y ganchos con traba antes de izar.", "l": "Carga suspendida"}, {"p": -40, "y": 0, "t": "info", "i": "🟩", "title": "Senda peatonal demarcada", "text": "Circulá siempre por la senda verde delimitada en amarillo. Las máquinas y autoelevadores tienen prioridad fuera de ella.", "l": "Senda"}, {"p": -12, "y": -35, "t": "risk", "i": "🛢️", "title": "Acopio de caños", "text": "Caños apilados sin calzar pueden rodar: usar calzas o cunas y no subirse a la pila.", "l": "Acopio"}, {"p": 2, "y": 106, "t": "risk", "i": "🪜", "title": "Escalera", "text": "Subir y bajar de frente, con tres puntos de apoyo y las manos libres. Usar siempre la baranda.", "l": "3 puntos de apoyo"}, {"p": -8, "y": -100, "t": "risk", "i": "🧤", "title": "Chapas y piezas cortantes", "text": "Manipular chapas con guantes anticorte y calzado de seguridad. Levantar flexionando las rodillas, carga máx. 25 kg por persona.", "l": "Cortes"}, {"p": -6, "y": 89, "t": "elec", "i": "⚡", "title": "Equipo de soldar", "text": "Verificar cables sin empalmes, pinza masa bien conectada y equipo con puesta a tierra.", "l": "Eléctrico"}, {"p": -3, "y": 160, "t": "link", "i": "➡️", "title": "Taller de herramientas", "text": "", "l": "Ir al taller de herramientas", "scene": "taller"}]}, "taller": {"title": "🔧 Taller de herramientas", "pano": "../pano/workshop.jpg", "yaw": -20, "hs": [{"p": -5, "y": -94, "t": "risk", "i": "⚙️", "title": "Amoladora de banco", "text": "Nunca retirar la guarda. Ajustar el apoya-piezas a 3 mm de la piedra. Antiparras + protector facial.", "l": "Amoladora"}, {"p": -6, "y": 17, "t": "risk", "i": "🧪", "title": "Cilindro de gas", "text": "Los cilindros deben estar en posición vertical y encadenados. Válvulas cerradas cuando no se usan, lejos de fuentes de calor.", "l": "Cilindro"}, {"p": -16, "y": 13, "t": "risk", "i": "🔩", "title": "Amoladora angular sobre el banco", "text": "Desconectarla antes de cambiar el disco. Disco apto para las RPM de la máquina. Protector auditivo.", "l": "Amoladora angular"}, {"p": 5, "y": 38, "t": "risk", "i": "🎨", "title": "Pinturas y solventes", "text": "Leer la Ficha de Datos de Seguridad (FDS). Envases cerrados, ventilación y respirador para vapores orgánicos.", "l": "Químicos"}, {"p": -2, "y": -79, "t": "elec", "i": "🔌", "title": "Tomas sobrecargados", "text": "No usar zapatillas en cascada ni cables con empalmes. Tablero con disyuntor diferencial.", "l": "Eléctrico"}, {"p": -22, "y": 130, "t": "risk", "i": "🌀", "title": "Máquina con partes móviles", "text": "No usar ropa suelta, anillos ni pelo suelto. Bloqueo y etiquetado (LOTO) antes de mantenimiento.", "l": "Atrapamiento"}, {"p": -40, "y": -10, "t": "risk", "i": "➰", "title": "Cables en el piso", "text": "Riesgo de tropiezo: ordenar y colgar los cables al terminar la tarea.", "l": "Tropiezo"}, {"p": -3, "y": -120, "t": "link", "i": "⬅️", "title": "Nave", "text": "", "l": "Volver a la nave", "scene": "nave"}]}},hunt:true,onComplete:function(){alert("🏆 ¡Excelente! Encontraste todos los riesgos. Ahora probá el juego de EPP.")}});</script>
+</body>
+</html>
