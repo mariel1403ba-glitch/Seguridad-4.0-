@@ -21,9 +21,16 @@ window.VR = function (cfg) {
   sheet.querySelector('.x').onclick = function () { sheet.classList.remove('on'); };
   function updCount() { var e = wrap.querySelector('.vrcount'); if (e) e.textContent = '🔎 Riesgos encontrados: ' + Object.keys(found).length + '/' + total; }
   var scenes = {};
+  function fitHfov(s) {
+    if (!s.haov) return s.hfov || 100;
+    var r = wrap.clientWidth / Math.max(1, wrap.clientHeight), d2r = Math.PI / 180;
+    var byV = 2 * Math.atan(Math.tan(s.vaov * 0.92 * d2r / 2) * r) / d2r;
+    return Math.max(20, Math.min(s.hfov || 75, s.haov * 0.92, byV));
+  }
   Object.keys(cfg.scenes).forEach(function (sid) {
     var s = cfg.scenes[sid];
-    scenes[sid] = {title: s.title, type: 'equirectangular', panorama: s.pano, yaw: s.yaw || 0, pitch: s.pitch || 0, hfov: s.hfov || 100,
+    scenes[sid] = {title: s.title, type: 'equirectangular', panorama: s.pano, yaw: s.yaw || 0, pitch: s.pitch || 0, hfov: fitHfov(s),
+      haov: s.haov || 360, vaov: s.vaov || 180, vOffset: 0, minHfov: 15, maxHfov: s.haov ? fitHfov(s) : 120,
       hotSpots: s.hs.map(function (h, idx) {
         var key = sid + idx, hunt = cfg.hunt && h.t !== 'link';
         if (hunt) total++;

@@ -8,5 +8,5 @@ EXPERIENCIAS INTERACTIVAS - SEGURIDAD E HIGIENE - CORRALON MUNICIPAL VIRASORO
    Se crean en qr/: qr_*.png (código solo), cartel_*.png (cartel A5) y carteles_QR.pdf (para imprimir).
 3) Rutas: /plano/  /contingencias/  /trabajar-seguro/  y  /  (índice con las 3).
 
-Panoramas 360°: Poly Haven (CC0). Fotos ilustrativas generadas con IA.
+Escenas interactivas: fotos reales del Corralón Municipal de Gobernador Virasoro. Portadas ilustrativas generadas con IA.
 El simulador es educativo y no reemplaza la capacitación práctica ni la actuación de Bomberos.

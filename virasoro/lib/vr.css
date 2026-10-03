@@ -13,7 +13,7 @@
 .vrwrap{position:relative;height:64vh;min-height:360px;max-height:620px;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 6px 24px rgba(0,0,0,.25)}
 .vrwrap.full{position:fixed;inset:0;height:auto;max-height:none;border-radius:0;z-index:3000}
 .vrwrap .pano{position:absolute;inset:0}
-.vrtop{position:absolute;top:10px;left:10px;right:10px;z-index:10;display:flex;gap:6px;flex-wrap:wrap;pointer-events:none}
+.vrtop{position:absolute;top:10px;left:10px;right:10px;z-index:10;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;pointer-events:auto}.vrtop::-webkit-scrollbar{display:none}.vrchip{white-space:nowrap;flex:0 0 auto}
 .vrtop>*{pointer-events:auto}
 .vrchip{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 12px;font:600 .74rem 'Segoe UI',system-ui;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .vrchip.on{background:#fff;color:#111}
@@ -22,7 +22,7 @@
 .vrhint{background:rgba(0,0,0,.6);color:#fff;font:500 .72rem 'Segoe UI';padding:7px 10px;border-radius:10px;max-width:62%}
 .vrbtns{display:flex;flex-direction:column;gap:6px}
 .vrcount{background:#e67e22;color:#fff;font:800 .8rem 'Segoe UI';padding:8px 12px;border-radius:999px}
-.hs{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;border:2px solid #fff;cursor:pointer;animation:hsp 2s infinite;position:relative}
+.hs{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;border:2px solid #fff;cursor:pointer;animation:hsp 2s infinite;position:absolute;top:0;left:0}
 .hs .lbl{position:absolute;top:42px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(0,0,0,.72);color:#fff;font:600 11px 'Segoe UI';padding:3px 8px;border-radius:6px;pointer-events:none}
 .hs-ext{background:#c0392b}.hs-risk{background:#e67e22}.hs-exit{background:#27ae60}.hs-info{background:#1f3a93}.hs-link{background:#fff;color:#111;width:44px;height:44px}.hs-elec{background:#8e44ad}
 .hs.hunt{background:rgba(255,255,255,.18);border-style:dashed}.hs.hunt .lbl{display:none}
